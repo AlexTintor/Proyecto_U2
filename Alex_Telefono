@@ -1,0 +1,46 @@
+package proyecto;
+
+public class Telefono {
+    
+    private char tipoDeTelefono;
+    private byte clavePais;
+    private long numTelefono;
+
+    public Telefono(char tipoDeTelefono,byte clavePais, long numTelefono) {
+        this.tipoDeTelefono = tipoDeTelefono;
+        this.clavePais = clavePais;
+        this.numTelefono = numTelefono;
+    }
+
+    public char getTipoDeTelefono() {
+        return tipoDeTelefono;
+    }
+
+    public void setTipoDeTelefono(char tipoDeTelefono) {
+        this.tipoDeTelefono = tipoDeTelefono;
+    }
+
+    public byte getClavePais() {
+        return clavePais;
+    }
+
+    public void setClavePais(byte clavePais) {
+        this.clavePais = clavePais;
+    }
+
+    public int getNumTelefono() {
+        return (int) numTelefono;
+    }
+
+    public void setNumTelefono(int numTelefono) {
+        this.numTelefono = numTelefono;
+    }
+    
+
+    @Override
+    public String toString() {
+        return "Telefono{" + "tipoDeTelefono=" + tipoDeTelefono + ", clavePais +" + clavePais + ", numTelefono=" + numTelefono + '}'+"\n";
+    }
+    
+    
+}
