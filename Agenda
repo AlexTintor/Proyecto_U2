@@ -1,0 +1,293 @@
+package proyecto_u2; /* \ */
+
+import java.util.*;
+public class Agenda {
+    
+    public static void main(String[]args){
+        Scanner sc = new Scanner(System.in);
+        int opcion;
+        ArrayList<PersonaTelefono> contacto = new ArrayList<PersonaTelefono>();
+        // Se pre llena el ArrayList para probar facilmente todas las opciones
+        PersonaTelefono ob1 = new PersonaTelefono("Samuel","De Luque",'m',"vegeta","o",(byte) 32, "55782993741");
+        PersonaTelefono ob2 = new PersonaTelefono("Irvin","Carrillo",'m',"vevo","c",(byte) 44, "5578578747");
+        PersonaTelefono ob3 = new PersonaTelefono("Alex","Bojorquez",'m',"alejandro","m",(byte) 52, "6674454646");
+        PersonaTelefono ob4 = new PersonaTelefono("Omar","Langarica",'m',"oram","m",(byte) 52, "6674235476");
+        PersonaTelefono ob5 = new PersonaTelefono("Luisa","Marquez",'f',"cristinini","m",(byte) 52, "66780842578");
+        PersonaTelefono ob6 = new PersonaTelefono("Sofia","Montoya",'f',"sofi","c",(byte) 44, "55467570674");
+        PersonaTelefono ob7 = new PersonaTelefono("Samy","Rivera",'f',"rivers","c",(byte) 44, "55309484925");
+        PersonaTelefono ob8 = new PersonaTelefono("Luis","Casares",'m',"willyrex","o",(byte) 55, "5546757674");
+        PersonaTelefono ob9 = new PersonaTelefono("Ibai","Llanos",'m',"ibaicito","o",(byte) 55, "53435633444");
+        PersonaTelefono ob10 = new PersonaTelefono("Abril","Garza",'f',"arigameplays","c",(byte) 44, "51309414225");
+        
+        contacto.add(ob1);
+        contacto.add(ob2);
+        contacto.add(ob3);
+        contacto.add(ob4);
+        contacto.add(ob5);
+        contacto.add(ob6);
+        contacto.add(ob7);
+        contacto.add(ob8);
+        contacto.add(ob9);
+        contacto.add(ob10);
+        do{
+            System.out.println("   ¿Que desea hacer?");
+            System.out.println("[1] Ver todo el directorio");
+            System.out.println("[2] Ver listado por telefono");
+            System.out.println("[3] Agregar persona");
+            System.out.println("[4] Buscar una persona");
+            System.out.println("[5] Eliminar");
+            System.out.println("[6] Consultar");
+            System.out.println("[7] Ordenar el directorio");
+            System.out.println("[8] Salir");
+            opcion=sc.nextInt();
+            
+            switch(opcion){
+
+                case 1: 
+                    verDirectorio(contacto);
+                    break;
+
+                case 2:
+                    listaTelefono(contacto);
+                    break;
+
+                case 3:
+                    agregar(contacto);
+                    break;
+
+                case 4:
+                    Buscar2(contacto);
+                    break;
+
+                case 5:
+                    elimina(contacto);
+                    break;
+
+                case 6:
+                    Consultar(contacto);
+                    break;
+
+                case 7:
+                    Ordenar(contacto);
+                    break;
+
+                case 8:
+                    System.out.println("Fin");
+                    break;
+
+                default:
+                    System.out.println("   ---Opcion invalida---");
+                    break;
+            }
+            System.out.println("");
+        }while(opcion!=8);
+    }
+    
+    
+    
+    public static void agregar(ArrayList<PersonaTelefono> contacto){
+        Scanner sc = new Scanner (System.in);   
+
+        //Atributos
+        String tipo;
+        byte clave;
+        String num;
+        int u=1;
+        String buscar;
+        char p,sexo;
+        String nombre, apellido,alias;
+
+        //Agregar Persona y Telefono
+        while(u==1){
+            sc.nextLine();
+            System.out.println("--------------------------------------------------------------------------");
+            System.out.println("                          Agrega Contacto");
+            System.out.println("--------------------------------------------------------------------------");
+            System.out.println("Ingrese el nombre:");
+            nombre = sc.nextLine();
+            System.out.println("Ingrese el apellido:");
+            apellido = sc.nextLine();
+            System.out.println("Ingrese el sexo (Masculino 'm' / Femenino 'f'):");
+            sexo = sc.next().charAt(0);
+            sc.nextLine();
+            System.out.println("Ingrese el alias:");
+            alias = sc.nextLine();
+            System.out.println("Tipo de Telefono del contacto (Movil 'm' / Oficina 'o' / Casa 'c'):");
+            tipo=sc.nextLine();
+            System.out.println("Clave de su pais (Ej. +52):");
+            System.out.print("+");
+            clave=sc.nextByte();
+            System.out.println("Ingrese el numero:");
+            sc.next();
+            num=sc.nextLine(); 
+            System.out.println("-------------------------");
+            System.out.println("--- Contacto agregado ---");
+            System.out.println("-------------------------");
+            System.out.println("Agregar otro contacto");
+            System.out.println("[1] Si");
+            System.out.println("[0] No");
+            u=sc.nextInt();
+            contacto.add(new PersonaTelefono(nombre,apellido,sexo,alias,tipo,clave,num));
+        }
+    }
+            
+    public static void verDirectorio(ArrayList<PersonaTelefono> contacto){
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("                           Directorio completo");
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println(contacto);
+        System.out.println("--------------------------------------------------------------------------");  
+    }
+    
+    public static void listaTelefono(ArrayList<PersonaTelefono> contacto){
+        String tipo="m";
+        String tipo2="o";
+        String tipo1="c";
+        
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("               Directorio ordenado por Tipo de Telefono");
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("                       ---Telefonos Moviles---");
+        for(int i=0;i< contacto.size();i++){
+            if(tipo.equals(contacto.get(i).getTipoDeTelefono())){
+                System.out.print(contacto.get(i));
+            }
+        }
+        System.out.println("");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("                      ---Telefonos De Oficina---");
+        for (int j = 0; j < contacto.size(); j++) {
+            if(tipo2.equals(contacto.get(j).getTipoDeTelefono())){
+                System.out.print(contacto.get(j));
+            }
+        }
+        System.out.println("");
+        System.out.println("-------------------------------------------------------------------------");
+        System.out.println("                       ---Telefonos de Casa---");
+        for (int k = 0; k < contacto.size(); k++) {
+            if(tipo1.equals(contacto.get(k).getTipoDeTelefono())){
+                System.out.print(contacto.get(k));
+            }
+        }
+        System.out.println("");
+        System.out.println("-------------------------------------------------------------------------");
+    }
+    
+    //Buscador
+    public static void Buscar2(ArrayList<PersonaTelefono> contacto){
+        Scanner sc = new Scanner (System.in);
+        String nombre;
+        int numero=0;
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("                           Buscar Persona");
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("-Busca una persona por sus iniciales-");
+        System.out.println("Introduce el nombre (o inicial de su nombre)");
+        nombre=sc.nextLine();
+        for (int i = 0; i < contacto.size(); i++) {
+            if (contacto.get(i).getNombre().contains(nombre)){ /*Se utilizo el contains 
+                para poder verificar si las letras a buscar se encuentran en el nombre
+                */
+                if(i==0){
+                    System.out.println("--Se concontraron los siguientes contactos--");
+                }
+                System.out.print(contacto.get(i).getNombre()+" ");
+                System.out.println(contacto.get(i).getApellido());
+                numero++;
+            }
+        }
+        if(numero==0){
+            System.out.println("No se encontro\n");
+        }
+    }
+            
+           
+    
+    //Ordenado
+    public static void Ordenar(ArrayList<PersonaTelefono> contacto){
+        Collections.sort(contacto);
+        System.out.println(contacto);
+    }
+
+    //Consultar
+    public static void Consultar (ArrayList<PersonaTelefono> contacto){
+        Scanner sc = new Scanner(System.in);
+        String consultaTelefono;
+        String buscar;
+        int numero=-1;
+        int opcion;
+        boolean existeCont=false;
+        sc.nextLine();
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("                           Consultar Contacto");
+        System.out.println("--------------------------------------------------------------------------");
+        System.out.println("¿Como desea buscar?");
+        System.out.println("[1] Por numero");
+        System.out.println("[2] Por nombre o alias");
+        opcion=sc.nextInt();
+        switch(opcion){
+            case 1:
+                //Por numero de telefono
+                System.out.println("Introduce el numero");
+                sc.next();
+                consultaTelefono = sc.nextLine();                
+                for (int i = 0; i < contacto.size(); i++) {
+                    if(consultaTelefono.equals(contacto.get(i).getNumTelefono())){
+                        numero=i;
+                        existeCont=true; //Se usa para saber si existe el contacto
+                    } else{
+                        existeCont=false; //Se usa cuando no existe el contacto
+                    }
+                }
+                break;
+
+            case 2:
+                //Por nombre o alias
+                System.out.println("Introduce el nombre/alias a buscar");
+                sc.nextLine();
+                buscar=sc.nextLine();                
+                for (int i = 0; i < contacto.size(); i++) { 
+                    if(buscar.equals(contacto.get(i).getNombre())||buscar.equals(contacto.get(i).getAlias())){
+                        numero=i;
+                        existeCont=true; //Se usa para saber si existe el contacto
+                    } else{
+                        existeCont=false; //Se usa cuando no existe el contacto                     
+                    }
+                }
+                break;
+        }
+        if(existeCont){ //Si existe el contacto lo imprimira
+            System.out.println(contacto.get(numero));
+        }else{ //Si no existe el contacto arroja lo siguiente
+            System.out.println("------------------");
+            System.out.println("--No se encontro--");
+            System.out.println("------------------");
+        }
+        System.out.println("--------------------------------------------------------------------------");
+        
+    }
+            
+            
+            public static void elimina(ArrayList<PersonaTelefono> contacto){
+                Scanner sc = new Scanner ( System.in);
+                String nombreEliminar;
+                String apellidoEliminar;
+                int numero=-1;
+                        
+                System.out.println("Nombre de la persona ");
+                nombreEliminar=sc.nextLine();
+                System.out.println("Apellido de la persona");
+                apellidoEliminar=sc.nextLine();
+                for (int i = 0; i < contacto.size(); i++) {
+                if(nombreEliminar.equals(contacto.get(i).getNombre())&&apellidoEliminar.equals(contacto.get(i).getApellido()));{
+                      numero=i;
+                }
+                    if(numero!=-1){
+                        System.out.println(contacto.get(numero));
+                        contacto.remove(numero);
+                    }else{
+                        System.out.println("no se encontro al contacto");
+                    }
+                } 
+    }
+}
