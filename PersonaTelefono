@@ -1,0 +1,94 @@
+package proyecto_u2;
+
+public class PersonaTelefono implements Comparable<PersonaTelefono>{
+    /* Implementamos  el comparable para poder usar el compareTo */
+    private String nombre;
+    private String apellido;
+    private char sexo;
+    private String alias;
+    private String tipoDeTelefono;
+    private byte clavePais;
+    private String numTelefono;
+
+    public PersonaTelefono(String nombre, String apellido, char sexo, String alias,
+            String tipoDeTelefono, byte clavePais, String numTelefono) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.sexo = sexo;
+        this.alias = alias;
+        this.tipoDeTelefono = tipoDeTelefono;
+        this.clavePais = clavePais;
+        this.numTelefono = numTelefono;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public char getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(char sexo) {
+        this.sexo = sexo;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getTipoDeTelefono() {
+        return tipoDeTelefono;
+    }
+
+    public void setTipoDeTelefono(String tipoDeTelefono) {
+        this.tipoDeTelefono = tipoDeTelefono;
+    }
+
+    public byte getClavePais() {
+        return clavePais;
+    }
+
+    public void setClavePais(byte clavePais) {
+        this.clavePais = clavePais;
+    }
+
+    public String getNumTelefono() {
+        return numTelefono;
+    }
+
+    public void setNumTelefono(String numTelefono) {
+        this.numTelefono = numTelefono;
+    }
+ 
+    @Override
+    public String toString() {
+        return  "\n"+nombre + "  " + 
+                apellido + " | Sexo: " + sexo + " | Alias: " + alias +
+                " | Telefono: " + tipoDeTelefono + " | +" +
+                clavePais + "  " + numTelefono;
+    }
+
+    //Comparador para ordenar el escritorio
+    @Override
+    public int compareTo(PersonaTelefono nombre) {
+        return this.nombre.compareTo(nombre.getNombre());
+    }
+    
+}
