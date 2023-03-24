@@ -1,4 +1,4 @@
-package proyecto_u2;
+package proyecto2;
 
 public class PersonaTelefono implements Comparable<PersonaTelefono>{
     /* Implementamos  el comparable para poder usar el compareTo */
@@ -6,12 +6,12 @@ public class PersonaTelefono implements Comparable<PersonaTelefono>{
     private String apellido;
     private char sexo;
     private String alias;
-    private String tipoDeTelefono;
+    private char tipoDeTelefono;
     private byte clavePais;
     private String numTelefono;
 
     public PersonaTelefono(String nombre, String apellido, char sexo, String alias,
-            String tipoDeTelefono, byte clavePais, String numTelefono) {
+            char tipoDeTelefono, byte clavePais, String numTelefono) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.sexo = sexo;
@@ -53,11 +53,11 @@ public class PersonaTelefono implements Comparable<PersonaTelefono>{
         this.alias = alias;
     }
 
-    public String getTipoDeTelefono() {
+    public char getTipoDeTelefono() {
         return tipoDeTelefono;
     }
 
-    public void setTipoDeTelefono(String tipoDeTelefono) {
+    public void setTipoDeTelefono(char tipoDeTelefono) {
         this.tipoDeTelefono = tipoDeTelefono;
     }
 
