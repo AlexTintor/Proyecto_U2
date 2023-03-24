@@ -81,7 +81,7 @@ public class Agenda {
                         System.out.print("+");
                         clave=sc.nextByte();
                         System.out.println("Ingrese el numero:");
-                        sc.next();
+                        sc.nextLine();
                         num=sc.nextLine(); 
                         System.out.println("                     -------------------------");
                         System.out.println("                     --- Contacto agregado ---");
