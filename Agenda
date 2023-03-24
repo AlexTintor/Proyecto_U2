@@ -127,6 +127,7 @@ public class Agenda {
                 case 6:
                     String consultaTelefono;
                     String nombreBuscado;
+                    String apellidoBuscado;
                     int opcionConsultar;
                     String numeroConsultado;
                     System.out.println("--------------------------------------------------------------------------");
@@ -134,21 +135,33 @@ public class Agenda {
                     System.out.println("--------------------------------------------------------------------------");
                     System.out.println("¿Como desea buscar?");
                     System.out.println("[1] Por numero");
-                    System.out.println("[2] Por nombre o alias");
+                    System.out.println("[2] Por nombre y apellido");
+                    System.out.println("[3] Por alias");
                     opcionConsultar=sc.nextInt();
                     switch(opcionConsultar) { 
                         case 1:
-                            System.out.println("Cual es su numero?");
+                            System.out.println("Cual es el numero?");
                             numeroConsultado=sc.nextLine();//Puse dos iguales porque se lo saltaba y no lo leia
                             numeroConsultado=sc.nextLine();
-                           Consultar(contacto,numeroConsultado,opcionConsultar);
+                            Consultar(contacto,numeroConsultado,opcionConsultar);//Llamamos a un metodo que nos sirve 
+                            //   para buscar por telefono y alias
                             break;
                         case 2:
-                            System.out.println("Cual es su nombre o alias?");
+                            System.out.println("Cual es el nombre?");
                             nombreBuscado=sc.nextLine();//No leia la variable aunque le pusiera un sc.nextLine();, por eso lo lei dos veces
                             nombreBuscado=sc.nextLine();
-                            Consultar(contacto,nombreBuscado,opcionConsultar);
+                            System.out.println("Cual es el apellido?");
+                            apellidoBuscado=sc.nextLine();
+                            Consultar(contacto,nombreBuscado,apellidoBuscado);//Llamamos a otro metodo diferente de Consultar
                             break;
+                            
+                        case 3:
+                            System.out.println("Cual es el alias?");
+                            numeroConsultado=sc.nextLine();//Puse dos iguales porque se lo saltaba y no lo leia
+                            numeroConsultado=sc.nextLine();
+                            Consultar(contacto,numeroConsultado,opcionConsultar);//Llamamos a un metodo que nos sirve 
+                            //   para buscar por telefono y alias
+                            
                     }
                     break;
                 case 7:
@@ -233,41 +246,65 @@ public class Agenda {
             
            
     
-    //Ordenado
-   public static void Consultar(ArrayList<PersonaTelefono> contacto,String buscador,int opcion){
+    //Metodo para cuando consultamos por telefono o alias
+    public static void Consultar(ArrayList<PersonaTelefono> contacto,String buscador,int opcion){
         boolean existencia;
         int numero=-1;
-       switch(opcion){
-           case 1:
-               for (int i = 0; i < contacto.size(); i++) {
-                   if(buscador.equals(contacto.get(i).getNumTelefono())){
-                       numero=i;
-                   }
-               }
-               if(numero!=-1){
-               System.out.println(contacto.get(numero));
-           }else{
-                   System.out.println("No encontrado");
-               }
-               numero=-1;
-               break;
-           case 2:
-               for (int i = 0; i < contacto.size(); i++){
-                   if(buscador.equals(contacto.get(i).getNombre())||buscador.equals(contacto.get(i).getAlias())){
-                       numero=i;
-                   }
-               }
-               System.out.println(buscador);
-               if(numero!=-1)
-                   System.out.println(contacto.get(numero));
-               
-               else
-                   System.out.println("No encontrado");
-               
-               break;
-       }
+        switch(opcion){
+            case 1:
+                for (int i = 0; i < contacto.size(); i++) {
+                    if(buscador.equals(contacto.get(i).getNumTelefono())){
+                        numero=i;
+                    }
+                }
+                if(numero!=-1){
+                    System.out.println("");
+                    System.out.print("Contacto encontrado:");
+                    System.out.println(contacto.get(numero));
+                System.out.println("--------------------------------------------------------------------------");
+            }else{
+                    System.out.println("No encontrado");
+                }
+                numero=-1;
+                break;
+            case 3:
+                for (int i = 0; i < contacto.size(); i++){
+                    if(buscador.equals(contacto.get(i).getAlias())){
+                        numero=i;
+                    }
+                }
+                System.out.println(buscador);
+                if(numero!=-1){
+                    System.out.println("");
+                    System.out.print("Contacto encontrado:");
+                    System.out.println(contacto.get(numero));
+                    System.out.println("--------------------------------------------------------------------------");
+                }else{
+                    System.out.println("No encontrado");
+                }
+                break;
+        }
+    }
+   
+    //Metodo para cuando consultamos por nombre y apellido
+    public static void Consultar(ArrayList<PersonaTelefono> contacto,String nombre, String apellido){
+        boolean existencia;
+        int numero=-1;
+        for (int i = 0; i < contacto.size(); i++){
+            if(nombre.equals(contacto.get(i).getNombre())&&apellido.equals(contacto.get(i).getApellido())){
+               numero=i;
+            }
+        }
+        System.out.println(nombre+" "+apellido);
+        if(numero!=-1){
+            System.out.println("");
+            System.out.print("Contacto encontrado:");
+            System.out.println(contacto.get(numero));
+            System.out.println("--------------------------------------------------------------------------");
+        }else
+            System.out.println("No encontrado");
+        }
 
-   }
    
    
     public static void Ordenar(ArrayList<PersonaTelefono> contacto){
