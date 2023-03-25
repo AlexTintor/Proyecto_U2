@@ -1,4 +1,4 @@
-package project;
+package proyecto2;
 import java.util.*;
 public class Agenda {
 	 public static void main(String[]args){
@@ -59,7 +59,7 @@ public class Agenda {
 	                    char p,sexo;
 	                    String nombre, apellido,alias;
 
-	                    //Agregar Persona y Telefono
+                        //Agregar Persona y Telefono
 	                    while(u==1){
 	                        sc.nextLine();
 	                        System.out.println("--------------------------------------------------------------------------");
@@ -123,12 +123,32 @@ public class Agenda {
 	                    //System.out.println("                           Buscar Persona");
 	                    System.out.println("                           BUSCAR PERSONA");
 	                    System.out.println("--------------------------------------------------------------------------");
-	                    //System.out.println("-Busca una persona por sus iniciales-");
+	                    System.out.println("-Busca una persona por sus iniciales-");
+                            System.out.println("  (busca mediante datos incompletos)");
+                            System.out.println("[1] Buscar por Telefono");
+                            System.out.println("[2] Buscar por Nombre, ó Apellido, ó Alias");
+                            int opcBuscar=0;
+                            String buscarVar;
+                            opcBuscar = sc.nextInt();
+                            switch(opcBuscar){
+                                case 1:
+                                    System.out.println("Introduce el Numero:");
+                                    sc.nextLine();
+                                    buscarVar=sc.nextLine();
+                                    Buscar2(contacto,buscarVar,opcBuscar);
+                                    break;
+                                case 2:
+                                    System.out.println("Introduce el Nombre, ó Apellido, ó Alias");
+                                    sc.nextLine();
+                                    buscarVar=sc.nextLine();
+                                    Buscar2(contacto,buscarVar,opcBuscar);
+                                    break;
+                            }
 	                    //System.out.println("Introduce el nombre (o inicial de su nombre)");
-	                    System.out.println("Introduce el nombre:");
-	                    sc.nextLine();
-	                    nombre1=sc.nextLine();
-	                    Buscar2(contacto,nombre1);
+	                    //System.out.println("Introduce el nombre:");
+	                    //sc.nextLine();
+	                    //nombre1=sc.nextLine();
+	                    //Buscar2(contacto,nombre1);
 	                    break;
 
 	                case 5:
@@ -169,7 +189,7 @@ public class Agenda {
 	                            while( numeroConsultado.length()!=10){
 		                        	System.out.println("                 ---ERROR---");
 	 	                        	System.out.println("El numero debe contener 10 digitos");
-	 	                        	System.out.println("Vuelva a escibir el numero");
+	 	                        	System.out.println("Vuelva a escibir el numero:");
 	 	                        	numeroConsultado=sc.nextLine();
 		                        }
 	                            Consultar(contacto,numeroConsultado,opcionConsultar);//Llamamos a un metodo que nos sirve 
@@ -254,23 +274,56 @@ public class Agenda {
 	     }
 	    
 	    //Buscador
-	    public static void Buscar2(ArrayList<PersonaTelefono> contacto,String nombre1){
+	    public static void Buscar2(ArrayList<PersonaTelefono> contacto,String nombre1, int opcBuscar){
 	        int numero=0;
-	        for (int i = 0; i < contacto.size(); i++) {
-	            if(i==0){
-	                System.out.println("--Se concontraron los siguientes contactos--");
-	            }
-	            if (contacto.get(i).getNombre().toLowerCase().contains(nombre1.toLowerCase())){ /*Se utilizo el contains 
-	                para poder verificar si las letras a buscar se encuentran en el nombre
-	                */
-	                System.out.print(contacto.get(i).getNombre()+" ");
-	                System.out.println(contacto.get(i).getApellido());
-	                numero++;
-	                }
-	        }
-	        if(numero==0){
-	            System.out.println("No se encontro\n");
-	        }
+                switch(opcBuscar){
+                    case 1://Buscar por telefono
+                        for (int i = 0; i < contacto.size(); i++) {
+                            if(i==0){
+                                System.out.println("--Se concontraron los siguientes contactos--");
+                            }
+                            if (contacto.get(i).getNumTelefono().contains(nombre1)){ /*Se utilizo el contains 
+                                para poder verificar si los numeros del telefono a buscar se encuentran en el telefono de el ArrayList
+                                */
+                                System.out.println(contacto.get(i));
+                                numero++;
+                            }
+                        }
+                        if(numero==0){
+                            System.out.println("No se encontro\n");
+                        }
+                        break;
+                        
+                    case 2://Buscar por nombre ó apellido ó alias
+                        for (int i = 0; i < contacto.size(); i++) {
+                            if(i==0){
+                                System.out.println("--Se concontraron los siguientes contactos--");
+                            }
+                            if (contacto.get(i).getNombre().toLowerCase().contains(nombre1.toLowerCase())||contacto.get(i).getApellido().toLowerCase().contains(nombre1.toLowerCase())||contacto.get(i).getAlias().toLowerCase().contains(nombre1.toLowerCase())){ /*Se utilizo el contains 
+                                para poder verificar si las letras a buscar se encuentran en el nombre
+                                */
+                                System.out.print(contacto.get(i));
+                                if(contacto.get(i).getNombre().toLowerCase().contains(nombre1.toLowerCase())){
+                                    System.out.println("\t-\tSe encontro por Nombre: "+contacto.get(i).getNombre());
+                                }else if(contacto.get(i).getApellido().toLowerCase().contains(nombre1.toLowerCase())){
+                                    System.out.println("\t-\tSe encontro por Apellido: "+contacto.get(i).getApellido());
+                                }else if(contacto.get(i).getAlias().toLowerCase().contains(nombre1.toLowerCase())){
+                                    System.out.println("\t-\tSe encontro por Alias: "+contacto.get(i).getAlias());
+                                }
+                                
+                                //System.out.print(contacto.get(i).getNombre()+" ");
+                                //System.out.println(contacto.get(i).getApellido());
+                                numero++;
+                            }
+                        }
+                        if(numero==0){
+                            System.out.println("No se encontro\n");
+                        }
+                        break;
+                        
+
+                }
+	        
 	        System.out.println("--------------------------------------------------------------------------");
 	    } 
 	            
@@ -344,13 +397,68 @@ public class Agenda {
 
 	    //Elimina  
 	    public static void elimina(ArrayList<PersonaTelefono> contacto,String nombreElimina,String apellidoElimina){
+                Scanner sc =  new Scanner(System.in);
 	        int numero=-1;
+                int contRep=0;
+                int largo=0;
+                int opcEliminar=0;
+                int opcWhile=0;
+                ArrayList<PersonaTelefono> cont_rep = new ArrayList<PersonaTelefono>();
 	        for (int i = 0; i < contacto.size(); i++) {
-		        if(nombreElimina.equals(contacto.get(i).getNombre())&&apellidoElimina.equals(contacto.get(i).getApellido())){
+		        if(nombreElimina.toLowerCase().equals(contacto.get(i).getNombre().toLowerCase())&&apellidoElimina.toLowerCase().equals(contacto.get(i).getApellido().toLowerCase())){
 		              numero=i;
+                              contRep++;//Si entra al if es porque encontro por lo menos 1 contacto con los datos ingresados
+                              //    Si contRep es >1 es porque existen 2 o mas contactos con los mismos datos
+                              cont_rep.add(new PersonaTelefono(contacto.get(i).getNombre(),contacto.get(i).getApellido(),contacto.get(i).getSexo(),contacto.get(i).getAlias(),contacto.get(i).getTipoDeTelefono(),contacto.get(i).getClavePais(),contacto.get(i).getNumTelefono()));
 		        }	              
 	        } 
-	        if(numero!=-1){
+                if(contRep>1){
+                    System.out.println("");
+                    System.out.println("");
+                    System.out.println("Se encontraron varios contactos:");
+                    for (int i = 0; i < cont_rep.size(); i++) {
+                        System.out.println(cont_rep.get(i)+"\tId: "+i);
+                    }
+                    do{
+                        System.out.println("");
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++");
+                        System.out.println("Selecciona el Id del contacto a Eliminar: ");
+                        int id = sc.nextInt();
+                        System.out.println("+++++++++++++++++++++++++++++++++++++++++");
+                        int opcWhile2=0;
+                        do{
+                            if(id>=0&&id<cont_rep.size()){//Verifica si el id introducido se encuentra entre las opciones
+                                opcWhile2=1;//Sale del while
+                            }else{
+                                System.out.println("Error - Introduce un id valido: ");
+                                id=sc.nextInt();
+                                opcWhile2=0;
+                            }
+                        }while(opcWhile2==0);
+                        System.out.println("Contacto seleccionado:");
+                        System.out.println(cont_rep.get(id));
+                        System.out.println("¿ELIMINAR?    [1]Si      [0]No");
+                        opcEliminar=sc.nextInt();
+                        switch(opcEliminar){
+                            case 1:
+                                cont_rep.remove(id);
+                                System.out.println("                   --------------------------");
+                                System.out.println("                   --- Contacto Eliminado ---");
+                                System.out.println("                   --------------------------");
+                                opcWhile=1;//Para salir del while
+                                break;
+                            case 0:
+                                opcWhile=0;//Para repetir el while
+                                break;
+                            default:
+                                System.out.println("");
+                                System.out.println("Opcion invalida :( - Intente de nuevo!!");
+                                opcWhile=0;
+                                break;
+                        }
+                    }while(opcWhile==0);
+                    
+                }else if(numero!=-1){
 	            System.out.println("");
 	            System.out.print("Contacto eliminado:");
 	            System.out.println(contacto.get(numero));
