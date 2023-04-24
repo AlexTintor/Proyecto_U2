@@ -1,7 +1,43 @@
-package proyecto2;
+/* POO | Unidad 2 | 10:00 - 11:00
+   Jesús Omar Langarica Ornelas
+   Irvin Jair Carrillo Beltran
+   Alex Fernando Bojorquez Rojas
+   Profesora: Maria Lucia Barron Estrada
+   Proyecto en Equipo*/
+
+/*
+OBSERVACIONES
+Métodos ESTATICOS en Agenda, nombres de métodos en Mayuscula
+
+CORRECIONES
+-Linea 40, se agrego 
+Agenda main = new Agenda();
+(Con el fin de quitarle lo estatico a los metodos, se ocupa una instancia para llamar a un metodo no estatico)
+
+-Linea 83 ANTES
+    verDirectorio(contacto);
+DESPUES
+    main.verDirectorio(contacto);
+(Se hizo lo mismo para TODAS las llamadas a metodos) -Se quito lo estatico de 
+                                                    los metodos
+
+-Linea 288 ANTES
+    public void static verDirectorio(...){
+DESPUES
+    public void verDirectorio(...){ 
+(Se hizo lo mismo para TODOS los metodos) -Se quito lo estatico de los metodos
+
+-Linea 190 ANTES
+    Buscar2(...){
+DESPUES
+    buscar2(...){
+(Se corrigió las mayusculas) -Se hizo lo mismo en Linea 250(consultar), 272 (ordenar)
+*/
+package proyecto_u2_final;
 import java.util.*;
 public class Agenda {
-public static void main(String[]args){
+	public static void main(String[]args){
+        Agenda main = new Agenda();
         Scanner sc = new Scanner(System.in);
         int opcion;
         ArrayList<PersonaTelefono> contacto = new ArrayList<PersonaTelefono>();
@@ -9,13 +45,14 @@ public static void main(String[]args){
         PersonaTelefono ob1 = new PersonaTelefono("Samuel","De Luque",'m',"vegeta",'o',(byte) 32, "55782993741");
         PersonaTelefono ob2 = new PersonaTelefono("Irvin","Carrillo",'m',"vevo",'c',(byte) 44, "5578578747");
         PersonaTelefono ob3 = new PersonaTelefono("Alex","Bojorquez",'m',"alejandro",'m',(byte) 52, "6677908296");
-        PersonaTelefono ob4 = new PersonaTelefono("Omar","Langarica",'m',"oram",'m',(byte) 52, "6674235476");
+        PersonaTelefono ob4 = new PersonaTelefono("Omar","Langarica",'m',"oram",'m',(byte) 52, "6674235476");       
         PersonaTelefono ob5 = new PersonaTelefono("Luisa","Marquez",'f',"cristinini",'m',(byte) 52, "66780842578");
         PersonaTelefono ob6 = new PersonaTelefono("Sofia","Montoya",'f',"sofi",'c',(byte) 44, "55467570674");
         PersonaTelefono ob7 = new PersonaTelefono("Samy","Rivera",'f',"rivers",'c',(byte) 44, "55309484925");
         PersonaTelefono ob8 = new PersonaTelefono("Luis","Casares",'m',"willyrex",'o',(byte) 55, "5546757674");
         PersonaTelefono ob9 = new PersonaTelefono("Ibai","Llanos",'m',"ibaicito",'o',(byte) 55, "53435633444");
         PersonaTelefono ob10 = new PersonaTelefono("Abril","Garza",'f',"arigameplays",'c',(byte) 44, "51309414225");
+        PersonaTelefono ob11 = new PersonaTelefono("Omar","Langarica",'f',"oram",'m',(byte) 52, "6677667766");
         
         contacto.add(ob1);
         contacto.add(ob2);
@@ -27,6 +64,7 @@ public static void main(String[]args){
         contacto.add(ob8);
         contacto.add(ob9);
         contacto.add(ob10);
+        contacto.add(ob11);
         do{
             System.out.println("   ¿Que desea hacer?");
             System.out.println("[1] Ver todo el directorio");
@@ -36,18 +74,17 @@ public static void main(String[]args){
             System.out.println("[5] Eliminar");
             System.out.println("[6] Consultar");
             System.out.println("[7] Ordenar el directorio");
-            System.out.println("[8] Editar Contacto");
-            System.out.println("[9] Salir");
+            System.out.println("[8] Salir");
             opcion=sc.nextInt();
             
             switch(opcion){
 
                 case 1:   
-                    verDirectorio(contacto);
+                    main.verDirectorio(contacto);
                     break;
 
                 case 2:
-                    listaTelefono(contacto);
+                    main.listaTelefono(contacto);
                     break;
 
                 case 3:
@@ -110,7 +147,7 @@ public static void main(String[]args){
                         System.out.println("Agregar otro contacto");
                         System.out.println("[1] Si");
                         System.out.println("[0] No");
-                        u=sc.nextInt();
+                        u=sc.nextInt();                        
                         while(u!=1 && u!=0){
                         	System.out.println("                 ---ERROR---");
                         	System.out.println("Vuelva a escibir el numero");
@@ -138,26 +175,27 @@ public static void main(String[]args){
                         int opcBuscar=0;
                         String buscarVar;
                         opcBuscar = sc.nextInt();
-                        
+                        while(opcBuscar!=1 && opcBuscar!=2){
+                        	System.out.println("                 ---ERROR---");
+                        	System.out.println("Vuelva a escibir el numero");
+                        	System.out.println("[1] Buscar por Telefono");
+                            System.out.println("[2] Buscar por Nombre, ó Apellido, ó Alias");
+                        	opcBuscar = sc.nextInt();
+                        }
                         switch(opcBuscar){
                             case 1:
                                 System.out.println("Introduce el Numero:");
                                 sc.nextLine();
                                 buscarVar=sc.nextLine();
-                                Buscar2(contacto,buscarVar,opcBuscar);
+                                main.buscar2(contacto,buscarVar,opcBuscar);
                                 break;
                             case 2:
                                 System.out.println("Introduce el Nombre, ó Apellido, ó Alias");
                                 sc.nextLine();
                                 buscarVar=sc.nextLine();
-                                Buscar2(contacto,buscarVar,opcBuscar);
+                                main.buscar2(contacto,buscarVar,opcBuscar);
                                 break;
-                        }
-                    //System.out.println("Introduce el nombre (o inicial de su nombre)");
-                    //System.out.println("Introduce el nombre:");
-                    //sc.nextLine();
-                    //nombre1=sc.nextLine();
-                    //Buscar2(contacto,nombre1);
+                        }                    
                     break;
 
                 case 5:
@@ -172,7 +210,7 @@ public static void main(String[]args){
                     nombreEliminar=sc.nextLine();
                     System.out.println("Apellido de la persona: ");
                     apellidoEliminar=sc.nextLine();
-                    elimina(contacto,nombreEliminar,apellidoEliminar);
+                    main.elimina(contacto,nombreEliminar,apellidoEliminar);
                     break;
 
                 case 6:
@@ -191,8 +229,11 @@ public static void main(String[]args){
                     System.out.println("[3] Por alias");
                     opcionConsultar=sc.nextInt();
                     while(opcionConsultar!=1 && opcionConsultar!=2 && opcionConsultar!=3 ){
-                    	System.out.println("         ---ERROR---");
-                    	System.out.println("Vuelva a escibir la el numero");
+                    	System.out.println("                 ---ERROR---");
+                    	System.out.println("Vuelva a escibir el numero");
+                    	System.out.println("[1] Por numero");
+                        System.out.println("[2] Por nombre y apellido");
+                        System.out.println("[3] Por alias");                    	
                     	opcionConsultar =sc.nextInt();
                     }	     
                     switch(opcionConsultar) { 
@@ -206,7 +247,7 @@ public static void main(String[]args){
  	                        	System.out.println("Vuelva a escibir el numero:");
  	                        	numeroConsultado=sc.nextLine();
 	                        }
-                            Consultar(contacto,numeroConsultado,opcionConsultar);//Llamamos a un metodo que nos sirve 
+                            main.consultar(contacto,numeroConsultado,opcionConsultar);//Llamamos a un metodo que nos sirve 
                             //   para buscar por telefono y alias
                             break;
                         case 2:
@@ -215,34 +256,23 @@ public static void main(String[]args){
                             nombreBuscado=sc.nextLine();
                             System.out.println("Cual es el apellido?");
                             apellidoBuscado=sc.nextLine();
-                            Consultar(contacto,nombreBuscado,apellidoBuscado);//Llamamos a otro metodo diferente de Consultar
+                            main.consultar(contacto,nombreBuscado,apellidoBuscado);//Llamamos a otro metodo diferente de Consultar
                             break;
                             
                         case 3:
                             System.out.println("Cual es el alias?");
                             numeroConsultado=sc.nextLine();//Puse dos iguales porque se lo saltaba y no lo leia
                             numeroConsultado=sc.nextLine();
-                            Consultar(contacto,numeroConsultado,opcionConsultar);//Llamamos a un metodo que nos sirve 
+                            main.consultar(contacto,numeroConsultado,opcionConsultar);//Llamamos a un metodo que nos sirve 
                             //   para buscar por telefono y alias
                             
                     }
                     break;
                 case 7:
-                    Ordenar(contacto);
+                    main.ordenar(contacto);
                     break;
-
-                case 8:
-                	String nombreEditar;
-                	String apellidoEditar;
-                	System.out.println("Mete el nombre que quieres editar");
-                	sc.nextLine();
-                	nombreEditar=sc.nextLine();
-                	System.out.println("Apellido");
-                	apellidoEditar=sc.nextLine();
-                	editar(contacto,nombreEditar,apellidoEditar);
-                	break;
                 
-                case 9:
+                case 8:
                     System.out.println("Fin");
                     break;
 
@@ -251,11 +281,11 @@ public static void main(String[]args){
                     break;
             }
             System.out.println("");
-        }while(opcion!=9);
+        }while(opcion!=8);
     }
     
             
-    public static void verDirectorio(ArrayList<PersonaTelefono> contacto){
+    public void verDirectorio(ArrayList<PersonaTelefono> contacto){
         System.out.println("--------------------------------------------------------------------------");
         System.out.println("                           DIRECTORIO COMPLETO");
         System.out.println("--------------------------------------------------------------------------");
@@ -263,7 +293,7 @@ public static void main(String[]args){
         System.out.println("--------------------------------------------------------------------------");  
     }
     
-	 public static void listaTelefono(ArrayList<PersonaTelefono> contacto){
+	 public void listaTelefono(ArrayList<PersonaTelefono> contacto){
     	 char tipo='m';
          char tipo2='o';
          char tipo1='c';
@@ -299,7 +329,7 @@ public static void main(String[]args){
      }
     
     //Buscador
-    public static void Buscar2(ArrayList<PersonaTelefono> contacto,String nombre1, int opcBuscar){
+    public void buscar2(ArrayList<PersonaTelefono> contacto,String nombre1, int opcBuscar){
         int numero=0;
             switch(opcBuscar){
                 case 1://Buscar por telefono
@@ -355,7 +385,7 @@ public static void main(String[]args){
            
     
     //Metodo para cuando consultamos por telefono o alias
-    public static void Consultar(ArrayList<PersonaTelefono> contacto,String buscador,int opcion){
+    public void consultar(ArrayList<PersonaTelefono> contacto,String buscador,int opcion){
         boolean existencia;
         int numero=-1;
         switch(opcion){
@@ -395,7 +425,7 @@ public static void main(String[]args){
     }
    
     //Metodo para cuando consultamos por nombre y apellido
-    public static void Consultar(ArrayList<PersonaTelefono> contacto,String nombre, String apellido){
+    public void consultar(ArrayList<PersonaTelefono> contacto,String nombre, String apellido){
         boolean existencia;
         int numero=-1;
         for (int i = 0; i < contacto.size(); i++){
@@ -415,15 +445,15 @@ public static void main(String[]args){
 
    
    
-    public static void Ordenar(ArrayList<PersonaTelefono> contacto){
+    public void ordenar(ArrayList<PersonaTelefono> contacto){
         Collections.sort(contacto);
         System.out.println(contacto);
     }
 
     //Elimina  
-    public static void elimina(ArrayList<PersonaTelefono> contacto,String nombreElimina,String apellidoElimina){
+    public void elimina(ArrayList<PersonaTelefono> contacto,String nombreElimina,String apellidoElimina){
             Scanner sc =  new Scanner(System.in);
-            int numero=-1;
+        int numero=-1;
             int contRep=0;
             int largo=0;
             int opcEliminar=0;
@@ -491,7 +521,7 @@ public static void main(String[]args){
                             break;
                         default:
                             System.out.println("");
-                            System.out.println("Opcion invalida  - Intente de nuevo!!");
+                            System.out.println("Opcion invalida :( - Intente de nuevo!!");
                             opcWhile=0;
                             break;
                     }
@@ -504,7 +534,7 @@ public static void main(String[]args){
                 System.out.println("¿ELIMINAR?    [1]Si      [0]No");
                 opcEliminar=sc.nextInt();
                 while(opcEliminar!=1 && opcEliminar!=0){
-                    System.out.println("                 ---ERROR---");
+                    System.out.println("            ---ERROR---");
                             System.out.println("Vuelva a escibir la opcion");
                             opcEliminar=sc.nextInt();
                 }
@@ -524,96 +554,5 @@ public static void main(String[]args){
         }
         System.out.println("--------------------------------------------------------------------------");
     }
-    
-    
-    public static void editar(ArrayList<PersonaTelefono> contacto,String nombre,String apellido){
-    	Scanner sc = new Scanner (System.in);
-    	int numero = 0;
-    	int entero ;
-    	String nombreNuevo;
-    	char nuevoSexo;
-    	byte clavePais;
-    	for(int i=0;i<contacto.size();i++){
-    		if(nombre.equals(contacto.get(i).getNombre())&&apellido.equals(contacto.get(i).getApellido())){
-    			numero=i;
-    			System.out.println(contacto.get(numero));
-    			System.out.println("¿Este contacto deseas editar? \n [1]Si \n [2]No");
-    			entero=sc.nextInt();
-    			 while(entero!=1 && entero!=2){
-                 	System.out.println("                 ---ERROR---");
-                 	System.out.println("Vuelva a escibir la opción ([1]Si [2]No)");
-                 	entero=sc.nextInt();
-                 }
-    			if(entero==1){
-    				System.out.println("Que deseas editar");
-    				System.out.println(" [1] Nombre \n [2] Apellido \n [3] Tipo de sexo \n [4] Alias");
-    				System.out.println(" [5] Tipo de telefono \n [6] Clave de pais \n [7] Numero de Telefono");
-    				entero = sc.nextInt();
-    				switch ( entero ){
-    				case 1:
-    					System.out.println("Introduce el nuevo Nombre");
-    					nombreNuevo=sc.nextLine();
-    					nombreNuevo=sc.nextLine();
-    					contacto.get(numero).setNombre(nombreNuevo);
-    					nombreNuevo=null; //null para que no aya error porque uso la misma variable
-    					break;
-    				case 2:
-    					System.out.println("Introduce el nuevo apellido");
-    					nombreNuevo=sc.nextLine();
-    					nombreNuevo=sc.nextLine();
-    					contacto.get(numero).setApellido(nombreNuevo);
-    					nombreNuevo=null;
-    					break;
-    				case 3:
-    					
-    					System.out.println("Introduce el nuevo sexo");    					
-    					nuevoSexo=sc.next().charAt(0);
-    					contacto.get(numero).setSexo(nuevoSexo);			
-    					
-    					while(nuevoSexo!='m'&&nuevoSexo!='f'){
-    					System.out.println("No encontrado \nselecciona otro dijito");
-    					nuevoSexo=sc.next().charAt(0);
-    					contacto.get(numero).setSexo(nuevoSexo);
-    					}
-    					
-    					break;
-    				case 4:
-    					System.out.println("Introduce el nuevo alias");
-    					nombreNuevo=sc.nextLine();
-    					nombreNuevo=sc.nextLine();
-    					contacto.get(numero).setAlias(nombreNuevo);
-    					nombreNuevo=null;
-    					break;
-    				case 5:
-    					System.out.println("Introduce el nuevo tipo de telefono");
-    					nuevoSexo=sc.next().charAt(0);
-    					contacto.get(numero).setTipoDeTelefono(nuevoSexo);
-    					break;
-    				case 6:
-    					System.out.println("Introduce la nueva clave de pais");
-    					clavePais=sc.nextByte();
-    					contacto.get(numero).setClavePais(clavePais);
-    					break;
-    					
-    				case 7:
 
-    					System.out.println("Introduce el nuevo numero de telefono");
-    					nombreNuevo=sc.nextLine();
-    					nombreNuevo=sc.nextLine();
-    					contacto.get(numero).setNumTelefono(nombreNuevo);
-    					
-    					
-    					while(nombreNuevo.length()!=10){		    					
-    					System.out.println("Error\nIntroduce otro numero");
-    					nombreNuevo=sc.nextLine();
-    					contacto.get(numero).setNumTelefono(nombreNuevo);
-    					}
-    					break;
-    				}
-    			}
-    			System.out.println(contacto.get(numero));
-    		}
-    		
-          }
-}
-}
+} 
